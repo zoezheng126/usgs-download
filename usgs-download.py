@@ -16,7 +16,6 @@ import sys
 import time
 import argparse
 import os
-import zipfile, io
 import urllib.request
 
 failure_download = []
