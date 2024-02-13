@@ -100,7 +100,7 @@ def sliding_crop(src, ndwi, h=512, w=512):
         y_start = y_end
     return results
 
-def save_npz_crops_to_tiffs(cropping_results, base_tiff_path,a,b,d,e,count):
+def save_npz_crops_to_tiffs(cropping_results, base_tiff_path,a,b,d,e,count,filename):
     """
     Save crops stored in cropping results to individual TIFF files.
 
@@ -109,7 +109,8 @@ def save_npz_crops_to_tiffs(cropping_results, base_tiff_path,a,b,d,e,count):
     - base_tiff_path: Base path for saving TIFF files.
     """
     data = cropping_results['data']
-    tiff_path = f"{base_tiff_path}_crop_{cropping_results['x_offset']}_{cropping_results['y_offset']}.tif"
+    tiff_name = f"{filename[:-4]}_crop_{cropping_results['x_offset']}_{cropping_results['y_offset']}.tif"
+    tiff_path = os.path.join(base_tiff_path, tiff_name)
     trans = rasterio.Affine(a, b, cropping_results['x_offset'],
                             d, e, cropping_results['y_offset'])
     with rasterio.open(tiff_path, 'w', driver='GTiff',
@@ -128,8 +129,9 @@ def load_tif_from_np(npz_path,base_tiff_path):
         d = results['d']
         e = results['e']
         count = results['count']
+        filename = results['filename']
         for r in results['accumulated_results']:
-            save_npz_crops_to_tiffs(r,base_tiff_path,a,b,d,e,count)
+            save_npz_crops_to_tiffs(r,base_tiff_path,a,b,d,e,count,filename)
 
 def main(args):
     input_dir = args.input_dir
@@ -148,17 +150,18 @@ def main(args):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    # crop tif to npz
     parser.add_argument('--np_dir', type=str, required=True, help='The directory to store np array')
-    parser.add_argument('--input_dir', type=str, required=True, help='directory to find usgs tif files')
-    parser.add_argument('--load_np', type=bool, default=False, help='Load tif from numpy array')
+    parser.add_argument('--input_dir', type=str, defualt=None, help='directory to find usgs tif files')
+
+    # load tif from npz
+    parser.add_argument('--npz_file', type=str, default=None, help='path to npz file')
     parser.add_argument('--tif_output_dir', type=str, default=None, help='directory to store tif files from numpy')
     args = parser.parse_args()
-    if not args.load_np:
+    if args.npz_file == None and args.tif_output_dir == None:
         main(args)
-    elif args.tif_output_dir == None:
-        raise Exception('Missing tif output directory')
     else:
-        load_tif_from_np(args.np_dir, args.tif_output_dir)
+        load_tif_from_np(args.npz_file, args.tif_output_dir)
 
 
     
