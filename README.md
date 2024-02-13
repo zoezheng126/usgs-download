@@ -15,6 +15,6 @@ In our dataset, for each Tiff file, `src_name.tif` of size (4,5000*5000) will be
 
 ## Load Tiff files from .npz sample command:
 ```
-python3 filter.py --load_np True --np_dir /path/to/dir/to/find/npz --tif_output_dir /path/to/store/tiff
+python3 filter.py --npz_file /path/to/dir/to/find/npz --tif_output_dir /path/to/store/tiff
 ```
 Here you can load .tif from .npz file to test if the saving process is correct.
