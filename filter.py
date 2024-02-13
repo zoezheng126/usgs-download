@@ -109,7 +109,7 @@ def save_npz_crops_to_tiffs(cropping_results, base_tiff_path,a,b,d,e,count,filen
     - base_tiff_path: Base path for saving TIFF files.
     """
     data = cropping_results['data']
-    tiff_name = f"{filename[:-4]}_crop_{cropping_results['x_offset']}_{cropping_results['y_offset']}.tif"
+    tiff_name = f"{str(filename)[:-4]}_crop_{cropping_results['x_offset']}_{cropping_results['y_offset']}.tif"
     tiff_path = os.path.join(base_tiff_path, tiff_name)
     trans = rasterio.Affine(a, b, cropping_results['x_offset'],
                             d, e, cropping_results['y_offset'])
