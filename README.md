@@ -19,7 +19,7 @@ python3 filter.py --npz_file /path/to/dir/to/find/npz --tif_output_dir /path/to/
 ```
 Here you can load .tif from a .npz file to test if the saving process is correct.
 
-## npz predict mask to shapefile command:
+## Convert npz predict mask to shapefile command:
 ```
 python3 npz_to_shp.py --input_dir /path/to/npz/dir --output_dir /path/to/shp/dir
 ```
