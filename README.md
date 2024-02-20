@@ -23,4 +23,10 @@ Here you can load .tif from a .npz file to test if the saving process is correct
 ```
 python3 npz_to_shp.py --input_dir /path/to/npz/dir --output_dir /path/to/shp/dir
 ```
-Here you convert a list of .npz files(each contain a batch output mask) to .shp files.
+Here you convert a list of .npz files(each contain a batch output masks to .shp files.
+
+## Convert npz_predict mask to TIFF command:
+```
+python3 npz_to_shp.py --input_dir /path/to/npz/dir --output_dir /path/to/tif/dir
+```
+Here you convert a list of .npz files(each contain a batch output masks to .tif files.
