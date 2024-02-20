@@ -17,4 +17,10 @@ In our dataset, for each Tiff file, `src_name.tif` of size (4,5000*5000) will be
 ```
 python3 filter.py --npz_file /path/to/dir/to/find/npz --tif_output_dir /path/to/store/tiff
 ```
-Here you can load .tif from .npz file to test if the saving process is correct.
+Here you can load .tif from a .npz file to test if the saving process is correct.
+
+## npz predict mask to shapefile command:
+```
+python3 npz_to_shp.py --input_dir /path/to/npz/dir --output_dir /path/to/shp/dir
+```
+Here you convert a list of .npz files(each contain a batch output mask) to .shp files.
