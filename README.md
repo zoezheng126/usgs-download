@@ -7,11 +7,16 @@ python3 usgs-download.py -u username -p password -o path/to/output/files/directo
 
 In addition, search `spatial_filter`, `temporal_filter`, and `acquisition_filter` in the script and modify if needed to download different areas and periods.
 
-## Save Tiff files to .npz sample command:
+## Save Tiff files to .npz sample (RGB) command:
 ```
 python3 filter.py --np_dir /path/to/dir/to/store/npz --input_dir /path/to/find/usgs/downloaded/tiff
 ```
 In our dataset, for each Tiff file, `src_name.tif` of size (4,5000*5000) will be cropped by (4,512,512) shifted windows and save to one `src_name.npz` file.
+
+## Save Tiff files to .npz sample (Greyscale) command:
+```
+python3 filter.py --input_dir /path/to/tif/dir --output_dir /path/to/dir/store/npz
+```
 
 ## Load Tiff files from .npz sample command:
 ```
